@@ -224,7 +224,7 @@ class Game:
             
             #display informative text to user
             User.correctPrompt()
-            print(User.decryptedLetter)
+            
             User.displayEncryptedLetter()
             User.displayKeysAndCharacters()
             User.displayHintsAndStrikes()
