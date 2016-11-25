@@ -1,0 +1,10 @@
+test
+easy
+happy as a clam
+3
+0
+60,96,18,18,y,-,96,62,-,96,-,c,l,96,98,
+60,96,18,62,98,
+h,a,p,s,m,
+1110
+a,b,d,e,f,g,h,i,j,k,m,n,o,p,q,r,s,t,u,v,w,x,z,
