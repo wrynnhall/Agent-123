@@ -1,11 +1,16 @@
 from User import User
 import gameFunctions as gF
+
+
 class Game:
 
+
+    #initiate Game
     def __init__(self):
+        #represents game state
         self.isDone = False
         
-
+    #prompts user for a name
     def getName(self):
         print("")
         print("We know your codename is Agent 123, but what is your username?")
@@ -16,7 +21,9 @@ class Game:
             name = input("")
                   
         return name
+
     
+    #checks the validity of the game
     def validName(self, name):
 
         #get file that contains valid characters, then make a list of those characters
@@ -43,7 +50,8 @@ class Game:
                 return isValid
         return isValid
 
-    
+
+    #promtps the user to select a difficulty
     def getDifficulty(self):
         print("")
         print("Which difficulty would you like to be set at?")
@@ -94,6 +102,7 @@ class Game:
     #defines getKey function to access in the sorted() function in addToHighscores function
     def getKey(self, item):
         return item[1]
+
         
     #takes the score the user has and adds it to highscores.txt. This will also format the
     #list so that the scores in the txt document will be in decending order.
@@ -126,27 +135,38 @@ class Game:
         #sort the list using the magical sorted() (sorts by the second index of each list in the list)
         highscoresList = sorted(highscoresList, key=self.getKey, reverse = True)
 
+        #nested for loop to check if the user name is already on the highscore list
+        #if it is, it then removes it and keeps the higher score, so there are no
+        #duplicate users on the user list.
         for i in range(0,(len(highscoresList))):
-            
             for j in range(i+1, len(highscoresList)):
-                if j < len(highscoresList): 
+                #make sure j is not out of range
+                if j < len(highscoresList):
+                    #if the names are equal in value, remove last user from the list
                     if highscoresList[i][0] == highscoresList[j][0]:
                         highscoresList.pop(j)
+                        
         #overwrite the file with the data from each list.
         outfile = open("highscores.txt",'w')
+        #for each item in the list add them to highscores.txt
         for item in highscoresList:
             outfile.write(item[0] + "," + str(item[1]) + "\n")
-        
+
+
+    #removes duplicate users from the user list.    
     def removeFromSavedUserList(self, User):
+        #create a list to hold all the usernames
         userList = []
+        #open savedUserList.txt
         userTxt = open('savedUserList.txt','r')
+        #add each line to the list
         for line in userTxt:
             if line != "":
                 line = line.strip("\n")
                 
                 userList.append(line)
         userTxt.close
-
+        #check if the name is in the list and remove it if it is.
         isPresent = True
         while isPresent == True:
             if User.name in userList:
@@ -154,23 +174,27 @@ class Game:
             else:
                 isPresent = False
         outfile = open('savedUserList.txt','w')
-
+        #write the name to the file.
         for item in userList:
             outfile.write(item + "\n")
     
                         
     #display main menu options and get user input option
     def mainMenu(self):
+        #prompt user to select an option
         print("")
         print("What would you like to do?")
         print("1 Solve for a key\n2 Solve entire letter\n3 Get a hint\n4 Exit the game")
         userOption = input("Press the corresponding number option, then hit <enter>\n")
 
         options = ['1','2','3','4']
+
+        #check if the option is valid
         isValid = False
         while isValid == False:
             if userOption in options:
                 isValid = True
+            #prompt user for new value if invalid
             else:
                 userOption = input("Not a valid option. Press the number option, then hit <enter>")
         return userOption
@@ -178,8 +202,9 @@ class Game:
 
     #display a save menu, then get which option the user wants
     def saveMenu(self):
+        #prompt user for save menu option. 
         userOption = input("Would you like to save your game? ('y' or 'n')")
-
+        #validate the input
         while userOption != "y" and userOption != "n":
             userOption = input("Please type 'y' or 'n' then hit <enter>")
 
@@ -196,8 +221,8 @@ class Game:
     def runLoop(self, User):
         self.howToPlay()
         while self.isDone == False:
-            #display informative text to user
             
+            #display informative text to user
             User.correctPrompt()
             print(User.decryptedLetter)
             User.displayEncryptedLetter()
@@ -245,6 +270,7 @@ class Game:
                 gF.winPrompt()
                 self.isDone = True
                 self.removeFromSavedUserList(User)
+            
             self.newScreen()    
             
 
