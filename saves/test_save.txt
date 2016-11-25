@@ -1,10 +1,10 @@
 test
 easy
-happy as a clam
+quick on the draw
 3
 0
-60,96,18,18,y,-,96,62,-,96,-,c,l,96,98,
-60,96,18,62,98,
-h,a,p,s,m,
-1110
-a,b,d,e,f,g,h,i,j,k,m,n,o,p,q,r,s,t,u,v,w,x,z,
+30,10,69,28,39,-,43,n,-,t,35,58,-,76,r,6,36,
+30,10,69,28,39,43,35,58,76,6,36,
+q,u,i,c,k,o,h,e,d,a,w,
+1280
+a,b,c,d,e,f,g,h,i,j,k,l,m,o,p,q,s,u,v,w,x,y,z,

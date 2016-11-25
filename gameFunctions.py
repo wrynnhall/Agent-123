@@ -104,12 +104,37 @@ def displaySavedUserlist():
     
 #prompts the user to enter their username that has been
 #previously saved, then checks it against userList.txt. Finally, returns the name
-def getSavedUserName():
+def getPreviousUserName():
     
     userList = open("userList.txt",'r')
     
     nameList = []
 
+    for line in userList:
+        line = line.replace("\n","")
+        nameList.append(line)
+    
+    name = input("Which was your username?")
+    isValid = False
+
+    while isValid == False:
+
+        if name in nameList:
+            isValid = True
+        else:
+            name = input("Please enter your username that is in the user list.")
+
+    return name
+
+
+#prompts the user to enter their username that has been
+#previously saved, then checks it against userList.txt. Finally, returns the name
+def getSavedUserName():
+    
+    userList = open("savedUserList.txt",'r')
+    
+    nameList = []
+    
     for line in userList:
         line = line.replace("\n","")
         nameList.append(line)

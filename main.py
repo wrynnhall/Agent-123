@@ -29,13 +29,13 @@ def main():
                 if gF.previousUser() == True:
 
                     #show list of usernames and check if their are any
-                    userList = gF.displayUserlist()
+                    userList = gF.displaySavedUserlist()
                     if userList == False:
                         print("There are no saved users")
                         
                     else:
                         #get the user's username
-                        name = gF.getSavedUserName()
+                        name = gF.getPreviousUserName()
                         #abel the path that the users data is in
                         savedPath = gF.getSavedFilePath(name)
                         
@@ -79,7 +79,7 @@ def main():
                 else:
                     #get the user's username
                     name = gF.getSavedUserName()
-                    #abel the path that the users data is in
+                    #label the path that the users data is in
                     savedPath = gF.getSavedFilePath(name)
 
                     #create new user and initialze the saved game data
