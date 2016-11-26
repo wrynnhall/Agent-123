@@ -79,7 +79,6 @@ class User:
 
         #create a list of unique, random numbers between 1 and 100 whose length does not
         #exceed the number of unique characters
-
         keyList = []
 
         #keep track of how many random numbers created so far using index.
@@ -186,59 +185,73 @@ class User:
     #check if the users character choice is equal to the actual character with the user provided key
     #returns true if user is correct, and false if wrong.
     def checkUserSolution(self):
+
+        #create index to hold where the key is stored in the list
         index = 0
-        keyIndex = 0
-        
+        #check for the key in the list
         for key in self.keyAndCharList[0]:
+            
             if key == self.userKey:
-    
+                #set actualChar to the value and the index in the 2D list
                 self.actualChar = self.keyAndCharList[1][index]
                 break
-
-            
+            #increment index should it not be found at that index.
             index += 1
+        #find if actualChar and userChar are the same, which means the user
+        #guessed correctly
         if self.actualChar == self.userChar:
+            #edit all the arguments to reflect the correct values.
             self.correct = True
             self.editEncryptedLetter()
             self.editValidChars()
             self.editKeyAndCharList()
             self.addScore(self.difficulty, "plus")
-            
-            
+        #if the user guessed wrong...    
         else:
-            
+            #adjust for wrong values.
             self.strikes -= 1
-            
             self.correct = False
             self.addScore(self.difficulty, "minus")
+            #if the user has no more strikes left, they lose.
             if self.strikes < 0:
-                
                 self.lose = True
-            
 
 
+    #prints text based on the value of self.correct, reflects user correctness, wrongness,
+    #and if they used a hint            
     def correctPrompt(self):
+        #if it's correct, display correct prompt
         if self.correct == True:
             print("That was correct Agent...")
+        #if it's wrong, display wrong prompt
         elif self.correct == False:
             print("That was wrong Agent...")
+        #if it's a hint, display hint prompt
         elif self.correct == "hint":
             print("Here is your hint:")
         else:
             print("")
 
+
+    #called when user wants to solve for the entire letter.
     def solveEntireLetter(self):
+        #get user input
         solution = input("Type what you think the letter says, then hit enter. Remember: only input lower case letters\n" +
                          "and spaces (<spacebar>). This is your only warning!\n-->")
+        #if the user guesses correctly
         if solution == self.decryptedLetter:
+            #edit win variables and game state
             self.win = True
             self.addScore(self.difficulty, "solved")
             self.saveGame()
+        #if the user guessed wrong
         else:
+            #edit wrong variables
             self.strikes -= 1
             self.correct = False
             self.addScore(self.difficulty, "minus")
 
+        #if the user guessed wrong and the strikes are at zero, they lose.
         if self.strikes < 0:
             self.lose = True
 
@@ -299,7 +312,8 @@ class User:
         
     #add to the score based on difficulty. plusOrMinus represents if the score should be added or subtracted
     def addScore(self, difficulty, plusOrMinus):
-        
+
+        #if the difficulty is easy
         if difficulty == "easy":
             if plusOrMinus == "plus":
                 self.score += 10
@@ -307,7 +321,7 @@ class User:
                 self.score -= 10
             elif plusOrMinus == "solved":
                 self.score += 50
-
+        #if the difficulty is intermediate
         elif difficulty == "intermediate":
             if plusOrMinus == "plus":
                 self.score += 50
@@ -315,7 +329,7 @@ class User:
                 self.score -= 50
             elif plusOrMinus == "solved":
                 self.score += 75
-            
+        #if the difficulty is hard    
         elif difficulty == "hard":
             
             if plusOrMinus == "plus":
