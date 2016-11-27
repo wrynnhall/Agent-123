@@ -29,7 +29,7 @@ def main():
                 if gF.previousUser() == True:
 
                     #show list of usernames and check if their are any
-                    userList = gF.displaySavedUserlist()
+                    userList = gF.displayUserlist()
                     if userList == False:
                         print("There are no saved users")
                         

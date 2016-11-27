@@ -26,6 +26,7 @@ class User:
         self.score = 0
         #only set to string until correctness is found (after first round)
         self.correct = ""
+
         
     #grabs a random line from the letters txt file and sets it to decryptedLetter
     def findRandomLetter(self):
@@ -52,12 +53,14 @@ class User:
         #set the letter at that line to self.decryptedLetter
         self.decryptedLetter = letter
 
+
     #prints how many hints and how many strikes the user has left.
     def displayHintsAndStrikes(self):
         print("")
         print("Strikes left: " + str(self.strikes))
         print("Hints left: " + str(self.hints))
         print("Score: " + str(self.score))
+
 
     #creates a list of unique characters used in the decrypted letter.
     def createCharacterList(self):
@@ -72,6 +75,7 @@ class User:
                     self.keyAndCharList[1].append(char)
 
 
+    #creates the list of unique keys and stores in a list
     def createKeyList(self):
 
         #get how many unique characters there are in the letter
@@ -121,6 +125,7 @@ class User:
         #set self.encryptedLetter to the final result   
         self.encryptedLetter = encryptLetter
 
+
     #solves for one key and character as long as the user has at least one hint.
     def getHint(self):
         if self.hints > 0:
@@ -134,6 +139,7 @@ class User:
             self.correct = "hint"
         else:
             print("You don't have any more hints")
+
         
     #takes the elements in the self.encryptedLetter and formats (prints) them. 
     def displayEncryptedLetter(self):
@@ -143,6 +149,7 @@ class User:
             print(key, end=" ")
         print()
         print("*"*122)
+
 
     #prints a formated display of the remaining keys characters.
     def displayKeysAndCharacters(self):
@@ -256,8 +263,6 @@ class User:
             self.lose = True
 
 
-
-        
     #if the user's solution is correct, this method is called to edit the self.encryptedLetter to change for it.
     def editEncryptedLetter(self):
         
@@ -269,29 +274,28 @@ class User:
                 self.encryptedLetter[index] = self.userChar
             index += 1
 
+
     #if the user is correct, will be called to remove the correct character given from self.validChars
     def editValidChars(self):
 
         self.validChars.remove(self.userChar)
 
+
     #removes the correct key and character from self.keyAndCharList
     def editKeyAndCharList(self):
 
         #remove correct key from the keys list
-        index = 0
         for key in self.keyAndCharList[0]:
             if key == self.userKey:
                 self.keyAndCharList[0].remove(key)
 
         #remove correct characters from the character list 
-        index = 0
         for char in self.keyAndCharList[1]:
             if char == self.actualChar:
                 self.keyAndCharList[1].remove(char)
 
         #sets gameOver to True, conveying the fact that since all keys are solved for, the game is over and won.
         if len(self.keyAndCharList[0]) == 0:
-            
             self.win = True
             
 
@@ -304,11 +308,13 @@ class User:
 
         return outputString
 
+
     #converts the string back into a list
     def stringToList(self, convertString):
         
         outputList = convertString.split(",")
         return outputList
+
         
     #add to the score based on difficulty. plusOrMinus represents if the score should be added or subtracted
     def addScore(self, difficulty, plusOrMinus):
@@ -331,15 +337,13 @@ class User:
                 self.score += 75
         #if the difficulty is hard    
         elif difficulty == "hard":
-            
             if plusOrMinus == "plus":
                 self.score += 100
             elif plusOrMinus == "minus":
                 self.score -= 100
             elif plusOrMinus == "solved":
-                self.score += 100
+                self.score += 150
             
-        
         
     #saves the current state of the game to a text file
     def saveGame(self):
@@ -391,10 +395,10 @@ class User:
             userList.write(self.name + "\n")
         userList.close()
 
+
     #provided a file, takes each line and reads to class arguments
     def getSavedData(self, file):
 
-        
         infile = open(file, 'r')
 
         #read name line. Does not need to be saved
@@ -430,24 +434,29 @@ class User:
         self.validChars = vCList
         self.validChars.remove("\n")
         infile.close()
+
         
     #sets the hints and strikes for the game depending on difficulty    
     def setHintsAndStrikes(self):
-        
+        #if the difficulty is easy set each to 3
         if self.difficulty == "easy":
             self.hints = 3
             self.strikes = 3
-
+        #if the difficulty is intermediate set each to 2
         elif self.difficulty == "intermediate":
             self.hints = 2
             self.strikes = 2
-            
+        #if the difficulty is hard set each to 1    
         elif self.difficulty == "hard":
             self.hints = 1
             self.strikes = 1
 
+
+    #for the beginning of the game, will reset validChars
     def setValidChars(self):
         self.validChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+
     #create new game conditions (start of a new game)
     def initializeNewGame(self):
         self.setValidChars()
