@@ -114,7 +114,7 @@ def getPreviousUserName():
         line = line.replace("\n","")
         nameList.append(line)
     
-    name = input("Which was your username?")
+    name = input("Which was your username?\n")
     isValid = False
 
     while isValid == False:
@@ -122,7 +122,7 @@ def getPreviousUserName():
         if name in nameList:
             isValid = True
         else:
-            name = input("Please enter your username that is in the user list.")
+            name = input("Please enter your username that is in the user list.\n")
 
     return name
 
@@ -139,7 +139,7 @@ def getSavedUserName():
         line = line.replace("\n","")
         nameList.append(line)
     
-    name = input("Which was your username?")
+    name = input("Which was your username?\n")
     isValid = False
 
     while isValid == False:
@@ -147,7 +147,7 @@ def getSavedUserName():
         if name in nameList:
             isValid = True
         else:
-            name = input("Please enter your username that is in the user list.")
+            name = input("Please enter your username that is in the user list.\n")
 
     return name
 
@@ -178,7 +178,7 @@ def losePrompt():
 #asks the user if they are a returning user, returns true or false depending on input.
 def previousUser():
     #get input from user
-    userOption = input("Are you a returning user? (hit 'y' or 'n' for yes or no, then hit <enter>")
+    userOption = input("Are you a returning user? (hit 'y' or 'n' for yes or no, then hit <enter>\n")
 
     #check if the user input 'y' or 'n'
     isValid = False
@@ -193,7 +193,7 @@ def previousUser():
                 return False
         #if the user did not input 'y' or 'n' then keep prompting for input until they do. Damn user validation...
         else:
-            userOption = input("Wrong input, please only type 'y' or 'n' then <enter>")
+            userOption = input("Wrong input, please only type 'y' or 'n' then <enter>\n")
             
         
         

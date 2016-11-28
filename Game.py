@@ -83,7 +83,7 @@ class Game:
     #How to play prompt. display to the user the rules of the game and how to play.     
     def howToPlay(self):
         print("")
-        print("********************************************************************************************************************")
+        print("**************************************************HOW TO PLAY**********************************************************")
         print("")
         print("The greatest decrypter in the agency is given the name Agent 123. You are said Agent.\n" +
               "Your mission is to decrypt any secret message the agency, known as K.W.O.O.D., recieves\n" +
@@ -92,7 +92,7 @@ class Game:
         print("...Forgotten the rules already Agent 123? Alright, I will briefly go over them again:")
         print("Remember: you are a DECRYPTER. Your job is to take the jumbled mess of numbers we give you\n" +
               "and turn them into dicernable sentences. You do this one number at a time. Take each number\n" +
-              "one by one and turn them into characters. The prompts will help guide you, but the critical thinking\n" +
+              "one by one and turn them into characters. The hyphen The prompts will help guide you, but the critical thinking\n" +
               "part is up to you. You can also have the computer solve a single problem for you by using a hint, but\n" +
               "you don't have many hints so use them wisely. You better be ready now Agent 123. Remember, you only have a\n" +
               "certain amount of misses, or strikes, before your usefulness to us ends.\n" +
@@ -153,6 +153,27 @@ class Game:
             outfile.write(item[0] + "," + str(item[1]) + "\n")
 
 
+    #Adds the name to the user list, unless it's already in the userList.txt
+    def addToUserList(self, User):
+        #create a list to hold values from text file
+        userList = []
+        #oepn text file
+        userTxt = open("userList.txt", 'r')
+        #add each line to the list, taking out the newline carriage return
+        for line in userTxt:
+            line = userTxt.readline()
+            line = line.strip("\n")
+            userList.append(line)
+        userTxt.close()
+        #open the file to possibly be appended
+        userTxt = open("userList.txt", 'a')
+
+        #if the user is not in the lsit, add it to the text file.
+        if User.name not in userList:
+            userTxt.write(User.name + "\n")
+        userTxt.close()
+
+            
     #removes duplicate users from the user list.    
     def removeFromSavedUserList(self, User):
         #create a list to hold all the usernames
@@ -196,17 +217,17 @@ class Game:
                 isValid = True
             #prompt user for new value if invalid
             else:
-                userOption = input("Not a valid option. Press the number option, then hit <enter>")
+                userOption = input("Not a valid option. Press the number option, then hit <enter>\n")
         return userOption
 
 
     #display a save menu, then get which option the user wants
     def saveMenu(self):
         #prompt user for save menu option. 
-        userOption = input("Would you like to save your game? ('y' or 'n')")
+        userOption = input("Would you like to save your game? ('y' or 'n')\n")
         #validate the input
         while userOption != "y" and userOption != "n":
-            userOption = input("Please type 'y' or 'n' then hit <enter>")
+            userOption = input("Please type 'y' or 'n' then hit <enter>\n")
 
         return userOption
 
@@ -260,12 +281,14 @@ class Game:
 
             #check whether user has struck out. sets isDone to true if true
             if User.lose == True:
+                self.addToUserList(User)
                 self.isDone = True
                 gF.losePrompt()
                 self.removeFromSavedUserList(User)
 
             #if the user wins the game, add their score to the highscore list
             if User.win == True:
+                self.addToUserList(User)
                 self.addToHighscores(User)
                 gF.winPrompt()
                 self.isDone = True
@@ -274,29 +297,3 @@ class Game:
             self.newScreen()    
             
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-        
