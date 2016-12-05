@@ -82,22 +82,13 @@ class Game:
    
     #How to play prompt. display to the user the rules of the game and how to play.     
     def howToPlay(self):
-        print("")
-        print("**************************************************HOW TO PLAY**********************************************************")
-        print("")
-        print("The greatest decrypter in the agency is given the name Agent 123. You are said Agent.\n" +
-              "Your mission is to decrypt any secret message the agency, known as K.W.O.O.D., recieves\n" +
-              "and to do it with as little failure as possible; continued failure shall not be tolerated\n")
-        print("With this in mind, you should get to work quickly on your newest assignment\n")
-        print("...Forgotten the rules already Agent 123? Alright, I will briefly go over them again:")
-        print("Remember: you are a DECRYPTER. Your job is to take the jumbled mess of numbers we give you\n" +
-              "and turn them into dicernable sentences. You do this one number at a time. Take each number\n" +
-              "one by one and turn them into characters. The hyphen The prompts will help guide you, but the critical thinking\n" +
-              "part is up to you. You can also have the computer solve a single problem for you by using a hint, but\n" +
-              "you don't have many hints so use them wisely. You better be ready now Agent 123. Remember, you only have a\n" +
-              "certain amount of misses, or strikes, before your usefulness to us ends.\n" +
-              "Alright, here is your next mission:")
+        #open howToPlay.txt and read out its contents
+        htp = open('howToPlay.txt', 'r')
+        #print each line in htp, print the line
+        for line in htp:
+            print(line, end="")
 
+        print()
         
     #defines getKey function to access in the sorted() function in addToHighscores function
     def getKey(self, item):
