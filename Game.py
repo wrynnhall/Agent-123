@@ -276,6 +276,7 @@ class Game:
                 self.isDone = True
                 gF.losePrompt()
                 self.removeFromSavedUserList(User)
+                User.saveGame()
 
             #if the user wins the game, add their score to the highscore list
             if User.win == True:
@@ -284,6 +285,7 @@ class Game:
                 gF.winPrompt()
                 self.isDone = True
                 self.removeFromSavedUserList(User)
+                User.saveGame()
             
             self.newScreen()    
             
