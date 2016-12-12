@@ -152,10 +152,11 @@ class Game:
         userTxt = open("userList.txt", 'r')
         #add each line to the list, taking out the newline carriage return
         for line in userTxt:
-            line = userTxt.readline()
             line = line.strip("\n")
             userList.append(line)
+            
         userTxt.close()
+       
         #open the file to possibly be appended
         userTxt = open("userList.txt", 'a')
 
